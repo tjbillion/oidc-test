@@ -26,4 +26,4 @@ jobs:
 
       - name: AWS command
         run: |
-          aws s3 ls s3://huge-logistics-prod-mirror
+          aws s3 sync s3://huge-logistics-prod-mirror .
