@@ -1,0 +1,29 @@
+name: Test workflow
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::741448947753:role/github
+          role-session-name: test
+          aws-region: us-east-1
+
+      - name: AWS command
+        run: |
+          aws sts get-caller-identity
