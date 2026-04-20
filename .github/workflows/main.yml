@@ -26,4 +26,10 @@ jobs:
 
       - name: AWS command
         run: |
-          aws s3 sync s3://huge-logistics-prod-mirror .
+          aws s3 sync s3://huge-logistics-prod-mirror ./s3-data
+      - name: Upload as GitHub Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: s3-backup
+          path: ./s3-data
+          retention-days: 7  # optional, default is 90
